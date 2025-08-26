@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:err="http://example.com/pokemon/soap/errors"
+    targetNamespace="http://example.com/pokemon/soap/errors"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+    <!-- 
+        error-detail.xsd
+
+        Define el esquema de errores reutilizable para los servicios SOAP.
+
+        Namespace: http://example.com/pokemon/soap/errors
+
+        Este esquema se utiliza en conjunto con pokemon.xsd para describir
+        los detalles de un error en el bloque <detail> de un SOAP Fault.
+
+        Elementos:
+          - ErrorDetail: contenedor raíz para describir errores.
+            * errorMessage → mensaje legible para el cliente
+            * cause        → (opcional) información técnica o excepción raíz
+    -->
+
+    <!-- Elemento raíz <ErrorDetail> -->
+    <xs:element name="ErrorDetail">
+        <xs:complexType>
+            <xs:sequence>
+                <!-- Mensaje principal del error, siempre requerido -->
+                <xs:element name="errorMessage" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Mensaje legible que describe la causa principal del error.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+
+                <!-- Causa opcional o mensaje técnico -->
+                <xs:element name="cause" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Información adicional (por ejemplo stacktrace, excepción raíz 
+                            o detalles técnicos para diagnóstico). Opcional.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

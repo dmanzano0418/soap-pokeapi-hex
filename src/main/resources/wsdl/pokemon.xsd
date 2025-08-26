@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://example.com/pokemon/soap/schemas"
+    xmlns:err="http://example.com/pokemon/soap/errors"
+    targetNamespace="http://example.com/pokemon/soap/schemas"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+    <!--
+        pokemon.xsd
+        
+        Esquema XML para el servicio SOAP de Pokémon.
+
+        Namespaces:
+        - tns → http://example.com/pokemon/soap/schemas  (este servicio)
+        - err → http://example.com/pokemon/soap/errors   (detalles de error reutilizables en Faults)
+
+        Notas importantes:
+        - Todas las operaciones de este servicio reciben un nombre de Pokémon en el *Request*.
+        - Los *Response* devuelven datos simples (int/string) o listas (string).
+        - Se usan nombres de elementos que coinciden con los getters/setters esperados en Java
+          (ej. lista 'abilities' → método getAbilities()).
+    -->
+
+    <!-- Import del esquema de errores (para usar en Fault details si aplica) -->
+    <xs:import namespace="http://example.com/pokemon/soap/errors"
+               schemaLocation="error-detail.xsd"/>
+
+    <!-- ================================================================== -->
+    <!-- Tipos compartidos                                                  -->
+    <!-- ================================================================== -->
+
+    <!-- ===================== -->
+    <!-- Requests (inline)     -->
+    <!-- ===================== -->
+
+    <xs:element name="AbilitiesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BaseExperienceRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="HeldItemsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="IdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="NameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="LocationAreaEncountersRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- ===================== -->
+    <!-- Responses (inline)    -->
+    <!-- ===================== -->
+
+    <xs:element name="AbilitiesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="abilities" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BaseExperienceResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="baseExperience" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="HeldItemsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="heldItems" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="IdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="NameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="LocationAreaEncountersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="encounters" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

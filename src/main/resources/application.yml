@@ -1,0 +1,64 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: soap-pokeapi-hex
+
+  datasource:
+    url: jdbc:h2:file:~/data/pokemon;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;MODE=Oracle
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: false
+
+# ============================================
+# Configuración de SOAP
+# ============================================
+  webservices:
+    # Path donde se publica el MessageDispatcherServlet
+    # Esto expone el WSDL en http://localhost:9001/ws/pokemon.wsdl
+    path: /ws
+
+logging:
+  level:
+    root: INFO
+    '[org.springframework.ws]': INFO
+    '[com.example.pokemon]': DEBUG
+  file:
+    name: logs/spring-boot-application.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+app:
+  masking:
+    # Longitud máxima de payloads antes de truncarlos (mínimo recomendado: 256, por defecto: 1024)
+    max-payload-length: 1024
+    # Lista de palabras clave a enmascarar
+    sensitive-keywords:
+      - password
+      - passwd
+      - pwd
+      - token
+      - authorization
+      - api_key
+      - apikey
+      - ssn
+      - creditcard
+      - cardnumber
+      - cvv
